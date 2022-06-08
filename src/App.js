@@ -1,25 +1,40 @@
-import logo from './logo.svg';
 import './App.css';
-
-function App() {
-  return (
-    <div className="App">
-      <header className="App-header">
-        <img src={logo} className="App-logo" alt="logo" />
-        <p>
-          Edit <code>src/App.js</code> and save to reload.
-        </p>
-        <a
-          className="App-link"
-          href="https://reactjs.org"
-          target="_blank"
-          rel="noopener noreferrer"
-        >
-          Learn React
-        </a>
-      </header>
+import React ,{Component} from 'react';
+import axios from 'axios';
+class App extends Component{
+  state={
+    text:""
+  };
+  handleAdd=async e=>{
+    await this.setState({
+      text:e.target.value
+    })
+  }
+  handleSubmit=e=>{
+    e.preventDefault();
+    console.log(this.state.text);
+    let formData = new FormData();
+    formData.append('text',this.state.text);
+    const url="http://localhost:80/react-backend/";
+    axios.post(url,formData)
+    .then(res=>console.log(res.data))
+    .catch(err=>console.log(err));
+  }
+  render()
+  {
+    return(
+      <div className="App-header">
+     <input onChange={this.handleAdd} type='text' className='form-control' id ="text" placeholder='Type you shit Oshani'/>
+     <br/>
+    <button className="btn btn-success" onClick={this.handleSubmit} id='submit'>Save</button>
     </div>
-  );
+    );
+
+  }
 }
+
+
+
+
 
 export default App;

@@ -6,6 +6,9 @@
   height: 40vmin;
   pointer-events: none;
 }
+.form-control {
+  width: 50%;
+}
 
 @media (prefers-reduced-motion: no-preference) {
   .App-logo {
